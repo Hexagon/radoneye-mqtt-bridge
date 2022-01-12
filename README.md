@@ -2,6 +2,8 @@
 
 This project provides a docker image which allows users collect current radon data from FTLab Radon Eye RD200 (Bluetooth only version).
 
+If you want to run a python script to read data from your RD200, see [https://github.com/ceandre/radonreader](https://github.com/ceandre/radonreader), which this project is based on.
+
 ## Hardware Requeriments
 - FTLabs RadonEye RD200 
 - Bluetooth LE (Low Energy) support on Docker host
