@@ -1,8 +1,8 @@
 # radoneye-mqtt-bridge
 
-This project provides a docker image which allows users collect current radon data from FTLab Radon Eye RD200 (Bluetooth only version).
+This project provides a docker image which allows users collect current radon data from FTLab Radon Eye RD200 (Bluetooth only version), and forward it to a MQTT broker.
 
-If you want to run a python script to read data from your RD200, see [https://github.com/ceandre/radonreader](https://github.com/ceandre/radonreader), which this project is based on.
+If you don't want to use Docker, see [https://github.com/ceandre/radonreader](https://github.com/ceandre/radonreader) (which this project is based on) for instructions of how to run this manually using Python.
 
 ## Hardware Requeriments
 - FTLabs RadonEye RD200 
