@@ -1,38 +1,57 @@
-# RadonReader
+# radoneye-mqtt-bridge
 
-This project provides a tool which allows users collect current radon data from FTLab Radon Eye RD200 (Bluetooth only version).
+This project provides a docker image which allows users collect current radon data from FTLab Radon Eye RD200 (Bluetooth only version).
 
-
-# Hardware Requeriments
+## Hardware Requeriments
 - FTLabs RadonEye RD200 
-- Raspberry Pi 
-- Bluetooth LE (Low Energy) support
+- Bluetooth LE (Low Energy) support on Docker host
 
+## Installation
 
-# Software Requeriments
-- Python 2.7.x 
-- bluepy Python library
+### Upgrading from a previous version
 
+Before building and running, stop and remove previous version
 
-# History
-- 0.3 - Added MQTT support
+```docker stop radoneye-monitor```
 
+```docker rm radoneye-monitor```
 
-# Usage
-<pre><code>usage: radon_reader.py [-h] -a ADDRESS [-b] [-v] [-s] [-m] [-ms MQTT_SRV]
-                       [-mp MQTT_PORT] [-mu MQTT_USER] [-mw MQTT_PW] [-ma]
+## Build and run
 
-RadonEye RD200 (Bluetooth/BLE) Reader
+Run the following commands to build and run.
 
-optional arguments:
-  -h, --help       show this help message and exit
-  -a ADDRESS       Bluetooth Address (AA:BB:CC:DD:EE:FF format)
-  -b, --becquerel  Display radon value in Becquerel (Bq/m^3) unit
-  -v, --verbose    Verbose mode
-  -s, --silent     Only output radon value (without unit and timestamp)
-  -m, --mqtt       Enable send output to MQTT server
-  -ms MQTT_SRV     MQTT server URL or IP address
-  -mp MQTT_PORT    MQTT server service port (Default: 1883)
-  -mu MQTT_USER    MQTT server username
-  -mw MQTT_PW      MQTT server password
-  -ma              Enable Home Assistant MQTT output (Default: EmonCMS)</code></pre>
+ote that ```RMB_MQTT_USER``` and ```RMB_MQTT_PASSWORD``` are mandatory.
+
+```docker build . --tag=hexagon/radoneye-mqtt-bridge```
+
+```sudo docker run \
+        -d \
+        --net=host \
+        --restart=always \
+        --privileged \
+        -e RMB_SERIAL=aa:bb:cc:dd:ee:ff \
+        -e RMB_MQTT_HOST=192.168.1.2 \
+        -e RMB_MQTT_PORT=1883 \
+        -e RMB_MQTT_USER=username \
+        -e RMB_MQTT_PASSWORD=password \
+        --name="radoneye-mqtt-bridge" \
+        hexagon/radoneye-mqtt-bridge```
+
+# Debugging
+
+sudo docker run \
+        --net=host \
+        --privileged \
+        -e RMB_SERIAL=aa:bb:cc:dd:ee:ff \
+        -e RMB_MQTT_HOST=192.168.1.2 \
+        -e RMB_MQTT_PORT=1883 \
+        -e RMB_MQTT_USER=username\
+        -e RMB_MQTT_PASSWORD=password \
+        --name="test" \
+        --it \
+        --entrypoint /bin/sh \
+        hexagon/radoneye-mqtt-bridge
+
+# Contributions and History
+
+This project is using radon_reader.py from [https://github.com/ceandre/radonreader](https://github.com/ceandre/radonreader), which is licensed by GitHub user ceandre under the GPLv3 license.
