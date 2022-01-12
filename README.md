@@ -8,21 +8,11 @@ This project provides a docker image which allows users collect current radon da
 
 ## Installation
 
-### Upgrading from a previous version
+### Installing from Docker Hub
 
-Before building and running, stop and remove previous version
+Install from Docker hub using the following command, make sure to change RMB_SERIAL and RMB_MQTT_HOST/PORT/USER/PASSWORD to your own settings.
 
-```docker stop radoneye-monitor```
-
-```docker rm radoneye-monitor```
-
-## Build and run
-
-Run the following commands to build and run.
-
-ote that ```RMB_MQTT_USER``` and ```RMB_MQTT_PASSWORD``` are mandatory.
-
-```docker build . --tag=hexagon/radoneye-mqtt-bridge```
+Please note that RMB_MQTT_USER and RMB_MQTT_PASSWORD is mandatory, pass anything if you do not have authentication enabled on your MQTT server.
 
 ```sudo docker run \
         -d \
@@ -35,22 +25,22 @@ ote that ```RMB_MQTT_USER``` and ```RMB_MQTT_PASSWORD``` are mandatory.
         -e RMB_MQTT_USER=username \
         -e RMB_MQTT_PASSWORD=password \
         --name="radoneye-mqtt-bridge" \
-        hexagon/radoneye-mqtt-bridge```
-
-# Debugging
-
-sudo docker run \
-        --net=host \
-        --privileged \
-        -e RMB_SERIAL=aa:bb:cc:dd:ee:ff \
-        -e RMB_MQTT_HOST=192.168.1.2 \
-        -e RMB_MQTT_PORT=1883 \
-        -e RMB_MQTT_USER=username\
-        -e RMB_MQTT_PASSWORD=password \
-        --name="test" \
-        --it \
-        --entrypoint /bin/sh \
         hexagon/radoneye-mqtt-bridge
+```
+
+### Manual/Local installation
+
+```docker build . --tag=local-radoneye-mqtt-bridge```
+
+Then use the command from the installation section, but replace ```hexagon/radoneye-mqtt-bridge``` with ```local-radoneye-mqtt-bridge```.
+
+### Upgrading from a previous version
+
+Before building and running, stop and remove previous version
+
+```docker stop radoneye-mqtt-bridge```
+
+```docker rm radoneye-mqtt-bridge```
 
 # Contributions and History
 
