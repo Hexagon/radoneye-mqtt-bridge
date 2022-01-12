@@ -15,7 +15,7 @@ Install from Docker hub using the following command, make sure to change RMB_SER
 Please note that RMB_MQTT_USER and RMB_MQTT_PASSWORD is mandatory, pass anything if you do not have authentication enabled on your MQTT server.
 
 ```
-sudo docker run \
+docker run \
         -d \
         --net=host \
         --restart=always \
