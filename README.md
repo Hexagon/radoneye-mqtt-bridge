@@ -33,17 +33,21 @@ docker run \
 
 ### Manual/Local installation
 
+If you want to build the docker image yourself, clone this repository and run
+
 ```docker build . --tag=local-radoneye-mqtt-bridge```
 
 Then use the command from the installation section, but replace ```hexagon/radoneye-mqtt-bridge``` with ```local-radoneye-mqtt-bridge```.
 
 ### Upgrading from a previous version
 
-Before building and running, stop and remove previous version
+First stop and remove previous version
 
 ```docker stop radoneye-mqtt-bridge```
 
 ```docker rm radoneye-mqtt-bridge```
+
+Then follow the above instruction to re-install from Docker Hub (or manually if you wish).
 
 # Contributions and History
 
